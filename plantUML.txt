@@ -1,0 +1,72 @@
+@startuml
+
+class Soldado {
+  - codigo: int
+  - nombre: String
+  - apellidos: String
+  - graduacion: String
+  + getCodigo(): int
+  + getNombre(): String
+  + getApellidos(): String
+  + getGraduacion(): String
+  + setCodigo(int): void
+  + setNombre(String): void
+  + setApellidos(String): void
+  + setGraduacion(String): void
+}
+
+class Cuartel {
+  - codigo: int
+  - nombre: String
+  - ubicacion: String
+  + getCodigo(): int
+  + getNombre(): String
+  + getUbicacion(): String
+  + setCodigo(int): void
+  + setNombre(String): void
+  + setUbicacion(String): void
+}
+
+class Cuerpo {
+  - codigo: int
+  - denominacion: String
+  + getCodigo(): int
+  + getDenominacion(): String
+  + setCodigo(int): void
+  + setDenominacion(String): void
+}
+
+class Compania {
+  - numero: int
+  - actividad: String
+  + getNumero(): int
+  + getActividad(): String
+  + setNumero(int): void
+  + setActividad(String): void
+}
+
+class Servicio {
+  - codigo: int
+  - descripcion: String
+  + getCodigo(): int
+  + getDescripcion(): String
+  + setCodigo(int): void
+  + setDescripcion(String): void
+}
+
+class SoldadoServicio {
+  - fechaRealizacion: Date
+  + getFechaRealizacion(): Date
+  + setFechaRealizacion(Date): void
+}
+
+Soldado "1" --> "1" Cuerpo : pertenece
+Soldado "1" --> "1" Compania : pertenece
+Soldado "1" --> "1" Cuartel : está destinado
+Compania "0..*" --> "0..*" Cuartel : está ubicada
+
+Soldado "0..*" -- "0..*" Servicio : realiza
+Soldado "0..*" -- "0..*" SoldadoServicio : realiza
+Servicio "0..*" -- "0..*" SoldadoServicio : es realizado por
+
+@enduml
